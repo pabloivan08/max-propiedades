@@ -1,0 +1,17 @@
+---
+// src/components/astro/Layout.astro
+---
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plataforma Inmobiliaria</title>
+    
+    <!-- CSS OBLIGATORIO DE MAPBOX -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css' rel='stylesheet' />
+  </head>
+  <body class="bg-gray-50 m-0 p-0 text-gray-900 overflow-hidden">
+    <!-- El slot es donde se inyectará el contenido de cada página -->
+    <slot />
+  </body>
+</html>

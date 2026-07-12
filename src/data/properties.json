@@ -1,0 +1,39 @@
+[
+  {
+    "id": "prop-001",
+    "title": {
+      "es": "Villa Moderna con Vista al Mar",
+      "en": "Modern Ocean-View Villa"
+    },
+    "description": {
+      "es": "Espectacular villa de 3 habitaciones con piscina infinita. Ideal para disfrutar atardeceres inolvidables.",
+      "en": "Spectacular 3-bedroom villa with infinity pool. Ideal for enjoying unforgettable sunsets."
+    },
+    "property_type": {
+      "es": "Casa",
+      "en": "House"
+    },
+    "price": 250000,
+    "coordinates": {
+      "lat": 21.1619,
+      "lng": -86.8515
+    },
+    "gallery": [
+      {
+        "type": "image",
+        "provider": "cloudinary",
+        "url": "v1710000000/tu-cuenta/villa-exterior.jpg"
+      },
+      {
+        "type": "image",
+        "provider": "cloudinary",
+        "url": "v1710000000/tu-cuenta/villa-interior.jpg"
+      },
+      {
+        "type": "video",
+        "provider": "youtube",
+        "url": "dQw4w9WgXcQ"
+      }
+    ]
+  }
+]

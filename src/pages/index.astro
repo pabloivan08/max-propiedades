@@ -1,17 +1,41 @@
 ---
-
+// src/pages/index.astro
+import Layout from '../components/astro/Layout.astro';
+import MapboxSearch from '../components/react/MapboxSearch.jsx';
+// Importamos tu "Base de datos"
+import propertiesData from '../data/properties.json';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <main class="flex h-screen w-full">
+    
+    <!-- LADO IZQUIERDO: Lista de Propiedades -->
+    <!-- En celular ocupa el 100% (w-full). En PC ocupa el 50% (md:w-1/2) -->
+    <section class="w-full md:w-1/2 h-full overflow-y-auto bg-white p-4 lg:p-6 z-10 relative shadow-[10px_0_15px_-3px_rgba(0,0,0,0.1)]">
+      
+      <!-- Navbar temporal super básico -->
+      <header class="flex justify-between items-center mb-6 pb-4 border-b">
+        <h1 class="text-2xl font-extrabold text-red-500">LogoAqui</h1>
+        <button class="bg-gray-100 px-4 py-2 rounded-full text-sm font-medium">ES / EN</button>
+      </header>
+
+      <h2 class="text-xl font-bold mb-4">1 propiedad encontrada</h2>
+
+      {/* AQUÍ IRA LA LISTA DE TARJETAS. Por ahora mostramos los datos crudos */}
+      <div class="bg-gray-100 p-4 rounded-xl text-xs overflow-auto max-h-96">
+        <pre>{JSON.stringify(propertiesData, null, 2)}</pre>
+      </div>
+
+    </section>
+
+    <!-- LADO DERECHO: Mapa Fijo -->
+    <!-- En celular se oculta (hidden). En PC ocupa el 50% (md:block md:w-1/2) -->
+    <section class="hidden md:block w-1/2 h-full fixed right-0 top-0 bg-gray-200">
+      
+      <!-- Aquí cargamos React! "client:load" le dice a Astro que esto debe ser interactivo -->
+      <MapboxSearch client:load properties={propertiesData} />
+      
+    </section>
+
+  </main>
+</Layout>
