@@ -1,0 +1,21 @@
+---
+import SearchLayout from '../../components/SearchLayout.jsx';
+import '../../styles/global.css';
+
+const locale = Astro.currentLocale ?? 'en';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Properties | Real Estate MVP</title>
+    <meta
+      name="description"
+      content="Find your next property with interactive map search."
+    />
+  </head>
+  <body>
+    <SearchLayout client:only="react" locale={locale} />
+  </body>
+</html>

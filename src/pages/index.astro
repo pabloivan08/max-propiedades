@@ -1,0 +1,21 @@
+---
+import SearchLayout from '../components/SearchLayout.jsx';
+import '../styles/global.css';
+
+const locale = Astro.currentLocale ?? 'es';
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Propiedades | Inmobiliaria MVP</title>
+    <meta
+      name="description"
+      content="Encuentra tu próxima propiedad con búsqueda interactiva en mapa."
+    />
+  </head>
+  <body>
+    <SearchLayout client:only="react" locale={locale} />
+  </body>
+</html>

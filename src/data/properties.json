@@ -1,0 +1,181 @@
+{
+  "properties": [
+    {
+      "id": "prop-001",
+      "property_type": "casa",
+      "price": 285000,
+      "currency": "USD",
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "area_m2": 210,
+      "coordinates": {
+        "lat": 15.857219134113217,
+        "lng": -97.05822413882086
+      },
+      "title": {
+        "es": "Villa Vista al Mar",
+        "en": "Ocean View Villa in Playa del Carmen"
+      },
+      "description": {
+        "es": "Espectacular villa de tres recámaras a solo 200 metros de la playa. Cuenta con alberca privada, cocina integral con acabados de mármol y una terraza con vista panorámica al Caribe. Ideal para inversión de renta vacacional o residencia de descanso.",
+        "en": "Spectacular three-bedroom villa just 200 meters from the beach. Features a private pool, a fully integrated marble-finish kitchen, and a terrace with panoramic Caribbean views. Ideal for vacation rental investment or a leisure residence."
+      },
+      "address": {
+        "es": "Zona Costera Norte, Playa del Carmen, Quintana Roo",
+        "en": "North Coastal Zone, Playa del Carmen, Quintana Roo"
+      },
+      "gallery": [
+        {
+          "type": "image",
+          "url": "/images/properties/property-001/villa-exterior.jpg",
+          "alt": {
+            "es": "Fachada",
+            "en": "Villa facade with private pool"
+          }
+        },
+        {
+          "type": "image",
+          "url": "/images/properties/villa-vista-mar-001/living-room.jpg",
+          "alt": {
+            "es": "Sala principal con vista al jardín",
+            "en": "Main living room with garden view"
+          }
+        },
+        {
+          "type": "image",
+          "url": "/images/properties/villa-vista-mar-001/kitchen.jpg",
+          "alt": {
+            "es": "Cocina integral con acabados de mármol",
+            "en": "Fully integrated kitchen with marble finishes"
+          }
+        },
+        {
+          "type": "video",
+          "url": "/videos/properties/villa-vista-mar-001/tour.mp4",
+          "alt": {
+            "es": "Recorrido en video por la propiedad",
+            "en": "Video walkthrough of the property"
+          }
+        }
+      ]
+    },
+    {
+      "id": "prop-002",
+      "property_type": "terreno",
+      "price": 105000,
+      "currency": "USD",
+      "bedrooms": false,
+      "bathrooms": 2,
+      "area_m2": 600,
+      "coordinates": {
+        "lat": 15.856183600720257,
+        "lng": -97.03887467518615
+      },
+      "title": {
+        "es": "Terreno en Plataforma",
+        "en": "Land in Plataforma"
+      },
+      "description": {
+        "es": "Espectacular villa de tres recámaras a solo 200 metros de la playa. Cuenta con alberca privada, cocina integral con acabados de mármol y una terraza con vista panorámica al Caribe. Ideal para inversión de renta vacacional o residencia de descanso.",
+        "en": "Spectacular three-bedroom villa just 200 meters from the beach. Features a private pool, a fully integrated marble-finish kitchen, and a terrace with panoramic Caribbean views. Ideal for vacation rental investment or a leisure residence."
+      },
+      "address": {
+        "es": "Zona Costera Norte, Playa del Carmen, Quintana Roo",
+        "en": "North Coastal Zone, Playa del Carmen, Quintana Roo"
+      },
+      "gallery": [
+        {
+          "type": "image",
+          "url": "/images/properties/property-002/realstate.jpg",
+          "alt": {
+            "es": "Fachada",
+            "en": "Villa facade with private pool"
+          }
+        },
+        {
+          "type": "image",
+          "url": "/images/properties/villa-vista-mar-001/living-room.jpg",
+          "alt": {
+            "es": "Sala principal con vista al jardín",
+            "en": "Main living room with garden view"
+          }
+        },
+        {
+          "type": "image",
+          "url": "/images/properties/property/villa-alpes.mp4",
+          "alt": {
+            "es": "Cocina integral con acabados de mármol",
+            "en": "Fully integrated kitchen with marble finishes"
+          }
+        },
+        {
+          "type": "video",
+          "url": "/videos/properties/villa-vista-mar-001/tour.mp4",
+          "alt": {
+            "es": "Recorrido en video por la propiedad",
+            "en": "Video walkthrough of the property"
+          }
+        }
+      ]
+    },
+    {
+      "id": "prop-003",
+      "property_type": "departamento",
+      "price": 305000,
+      "currency": "USD",
+      "bedrooms": 1,
+      "bathrooms": 2,
+      "area_m2": 200,
+      "coordinates": {
+        "lat": 15.865427,
+        "lng": -97.085300
+      },
+      "title": {
+        "es": "Departamento en Bacocho",
+        "en": "Apartment in Bacocho"
+      },
+      "description": {
+        "es": "Espectacular villa de tres recámaras a solo 200 metros de la playa. Cuenta con alberca privada, cocina integral con acabados de mármol y una terraza con vista panorámica al Caribe. Ideal para inversión de renta vacacional o residencia de descanso.",
+        "en": "Spectacular three-bedroom villa just 200 meters from the beach. Features a private pool, a fully integrated marble-finish kitchen, and a terrace with panoramic Caribbean views. Ideal for vacation rental investment or a leisure residence."
+      },
+      "address": {
+        "es": "Zona Costera Norte, Playa del Carmen, Quintana Roo",
+        "en": "North Coastal Zone, Playa del Carmen, Quintana Roo"
+      },
+      "gallery": [
+        {
+          "type": "image",
+          "url": "/images/properties/property-003/prop-003-01.jpg",
+          "alt": {
+            "es": "Fachada",
+            "en": "Villa facade with private pool"
+          }
+        },
+        {
+          "type": "image",
+          "url": "/images/properties/villa-vista-mar-001/living-room.jpg",
+          "alt": {
+            "es": "Sala principal con vista al jardín",
+            "en": "Main living room with garden view"
+          }
+        },
+        {
+          "type": "image",
+          "url": "/images/properties/property/villa-alpes.mp4",
+          "alt": {
+            "es": "Cocina integral con acabados de mármol",
+            "en": "Fully integrated kitchen with marble finishes"
+          }
+        },
+        {
+          "type": "video",
+          "url": "/videos/properties/villa-vista-mar-001/tour.mp4",
+          "alt": {
+            "es": "Recorrido en video por la propiedad",
+            "en": "Video walkthrough of the property"
+          }
+        }
+      ]
+    }
+  ]
+}
