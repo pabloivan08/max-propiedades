@@ -79,9 +79,11 @@ export default function SearchLayout({ locale = 'es' }) {
       <section className="flex h-1/2 w-full flex-col overflow-hidden md:h-full md:w-1/2">
         <header className="border-b border-[#e9e9e9] px-6 py-4 bg-[#f8f8f8]">
           <div className="flex items-center justify-between">
-            <h1 className="font-display text-2xl text-brand-900">
-              {t.title}
-            </h1>
+            <a href="https://maxpropiedadespxm.com">
+              <h1 className="font-display text-2xl text-brand-900">
+                {t.title}
+              </h1>
+            </a>
 
             <button
               type="button"
