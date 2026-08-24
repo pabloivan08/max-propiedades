@@ -1,11 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 @import "tailwindcss";
 
 @theme {
   --color-brand-500: #4b4c4b;
   --color-brand-600: #51905f;
+
   --font-display: "Fraunces", serif;
   --font-sans: "Inter", system-ui, sans-serif;
 }
@@ -31,10 +29,18 @@ body {
   cursor: pointer;
 }
 
-.mapboxgl-popup-content > div > img {
+.popup-image {
   border-radius: 20px 20px 0 0;
 }
 
-.mapboxgl-popup-content > div > div {
+.popup-content {
   padding: 6px 10px 14px;
+}
+
+.mapboxgl-popup-close-button {
+  display: none;
+}
+
+a {
+  outline: none;
 }

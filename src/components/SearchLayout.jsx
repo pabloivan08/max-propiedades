@@ -74,10 +74,10 @@ export default function SearchLayout({ locale = 'es' }) {
   };
 
   return (
-    <div className="flex h-screen w-full flex-col md:flex-row">
+    <div className="flex h-screen w-full flex-col md:flex-row bg-[#FFFAF3]">
       {/* ---------- Panel izquierdo: filtros + listado ---------- */}
       <section className="flex h-1/2 w-full flex-col overflow-hidden md:h-full md:w-1/2">
-        <header className="border-b border-[#e9e9e9] px-6 py-4 bg-[#f8f8f8]">
+        <header className="px-6 py-4 bg-[#ffffff]">
           <div className="flex items-center justify-between">
             <a href="https://maxpropiedadespxm.com">
               <h1 className="font-display text-2xl text-brand-900">
@@ -89,7 +89,7 @@ export default function SearchLayout({ locale = 'es' }) {
               type="button"
               onClick={() => setIsFilterOpen(true)}
               aria-label="Abrir filtros"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#e9e9e9] bg-white cursor-pointer text-brand-900 transition-colors hover:border-[#bfbfbf]"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#e9e9e9] bg-[#f8f6f1] cursor-pointer text-brand-900 transition-colors hover:border-[#bfbfbf]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -115,11 +115,11 @@ export default function SearchLayout({ locale = 'es' }) {
 
         {isFilterOpen && (
           <div
-            className="fixed inset-0 z-[100] flex items-end justify-center bg-brand-900/40 p-0 md:items-center md:p-6"
+            className="fixed inset-0 z-100 flex items-end justify-center bg-brand-900/40 p-0 md:items-center md:p-6"
             onClick={() => setIsFilterOpen(false)}
           >
             <div
-              className="w-full rounded-t-[2rem] bg-white p-6 shadow-2xl md:max-w-lg md:rounded-[2rem]"
+              className="w-full rounded-t-4xl bg-[#f8f6f1] p-6 shadow-2xl md:max-w-lg md:rounded-4xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header del modal */}
@@ -168,10 +168,10 @@ export default function SearchLayout({ locale = 'es' }) {
                       key={option.value}
                       type="button"
                       onClick={() => setPropertyType(option.value)}
-                      className={`rounded-xl border px-3 py-3 text-sm transition-colors ${
+                      className={`rounded-xl px-3 py-3 text-sm transition-colors ${
                         propertyType === option.value
-                          ? 'border-brand-900 bg-brand-900 text-white'
-                          : 'border-brand-100 bg-white text-brand-900 hover:bg-brand-50'
+                          ? 'bg-[#3e5b4b] text-[#f8f6f1] cursor-pointer'
+                          : 'bg-[#e4e4e4] text-[#3e5b4b] hover:bg-[#cddfd5] cursor-pointer'
                       }`}
                     >
                       {option.label}
@@ -254,10 +254,10 @@ export default function SearchLayout({ locale = 'es' }) {
                       key={option.value}
                       type="button"
                       onClick={() => setInvestmentType(option.value)}
-                      className={`flex items-center justify-between rounded-xl border px-4 py-3 text-left text-sm transition-colors ${
+                      className={`flex items-center justify-between rounded-xl px-4 py-3 text-left text-sm transition-colors ${
                         investmentType === option.value
-                          ? 'border-brand-900 bg-brand-900 text-white'
-                          : 'border-brand-100 bg-white text-brand-900 hover:bg-brand-50'
+                          ? 'bg-[#3e5b4b] text-[#f8f6f1] cursor-pointer'
+                          : 'border-[#3e5b4b] bg-[#e4e4e4] text-[#3e5b4b] hover:bg-[#cddfd5] cursor-pointer'
                       }`}
                     >
                       <span>{option.label}</span>
@@ -292,7 +292,7 @@ export default function SearchLayout({ locale = 'es' }) {
                     setInvestmentType('all');
                     setPriceRange([ABSOLUTE_MIN, ABSOLUTE_MAX]);
                   }}
-                  className="flex-1 rounded-full border border-brand-100 px-5 py-3 text-sm font-medium text-brand-900"
+                  className="flex-1 rounded-full px-5 py-3 bg-[#e4e4e4] text-sm font-medium text-brand-900 cursor-pointer hover:bg-[#cddfd5]"
                 >
                   Limpiar
                 </button>
@@ -300,7 +300,7 @@ export default function SearchLayout({ locale = 'es' }) {
                 <button
                   type="button"
                   onClick={() => setIsFilterOpen(false)}
-                  className="flex-1 rounded-full bg-brand-900 px-5 py-3 text-sm font-medium text-white"
+                  className="flex-1 rounded-full bg-[#3e5b4b] px-5 py-3 text-sm font-medium text-[#f8f6f1] cursor-pointer"
                 >
                   Ver resultados
                 </button>
@@ -311,7 +311,7 @@ export default function SearchLayout({ locale = 'es' }) {
 
 
 
-        <div className="flex-1 overflow-y-auto px-6 py-4">
+        <div className="flex-1 overflow-y-auto px-6 py-6">
           {filteredProperties.length === 0 ? (
             <p className="text-sm text-brand-900/50">{t.noResults}</p>
           ) : (
@@ -326,30 +326,32 @@ export default function SearchLayout({ locale = 'es' }) {
                     onMouseEnter={() => setHoveredId(property.id)}
                     onMouseLeave={() => setHoveredId(null)}
                   >
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-[20px]">
-                      <img
-                        src={image?.url}
-                        alt={image?.alt?.[locale] ?? ''}
-                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    </div>
-
-                    <div className="mt-1 px-2">
-                      <div className="flex items-start justify-between gap-2">
-                        <p className="truncate text-xl font-semibold text-brand-900">
-                          {property.title[locale]}
-                        </p>
+                    <a href={property.url.es}>
+                      <div className="relative aspect-4/3 overflow-hidden rounded-[20px]">
+                        <img
+                          src={image?.url}
+                          alt={image?.alt?.[locale] ?? ''}
+                          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          loading="lazy"
+                        />
                       </div>
 
-                      <p className="mt-0 text-lg- text-gray-500">
-                        {property.area_m2} m² {property.bedrooms ? ` - ${property.bedrooms} habitacion${property.bedrooms > 1 ? 'es' : ''}` : ''}
-                      </p>
+                      <div className="mt-1 px-2">
+                        <div className="flex items-start justify-between gap-2">
+                          <p className="truncate text-xl font-semibold text-brand-900">
+                            {property.title[locale]}
+                          </p>
+                        </div>
 
-                      <p className="mt-2 text-base font-semibold text-brand-900 underline font-1">
-                        {t.perNight} {property.price.toLocaleString(locale)}
-                      </p>
-                    </div>
+                        <p className="mt-0 text-lg- text-gray-500">
+                          {property.area_m2} m² {property.bedrooms ? ` - ${property.bedrooms} habitacion${property.bedrooms > 1 ? 'es' : ''}` : ''}
+                        </p>
+
+                        <p className="mt-2 text-base font-semibold text-brand-900 underline font-1">
+                          {t.perNight} {property.price.toLocaleString(locale)}
+                        </p>
+                      </div>
+                    </a>
                   </li>
                 );
               })}

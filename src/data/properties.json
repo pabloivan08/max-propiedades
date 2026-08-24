@@ -2,6 +2,10 @@
   "properties": [
     {
       "id": "prop-001",
+      "url":{
+        "es":"https://maxpropiedadespxm.com/propiedad001/",
+        "en":""
+      },
       "property_type": "casa",
       "price": 285000,
       "currency": "USD",
@@ -61,6 +65,10 @@
     },
     {
       "id": "prop-002",
+      "url":{
+        "es":"https://maxpropiedadespxm.com/propiedad-002/",
+        "en":""
+      },
       "property_type": "terreno",
       "price": 105000,
       "currency": "USD",
@@ -120,6 +128,10 @@
     },
     {
       "id": "prop-003",
+      "url":{
+        "es":"https://maxpropiedadespxm.com/propiedad001/",
+        "en":""
+      },
       "property_type": "departamento",
       "price": 305000,
       "currency": "USD",
