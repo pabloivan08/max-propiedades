@@ -47,70 +47,72 @@ export default function MapboxSearch({ properties, hoveredId, onMarkerHover, onM
   const selectedProperty = properties.find((p) => p.id === selectedId);
 
   return (
-    <Map
-      ref={mapRef}
-      mapboxAccessToken={MAPBOX_TOKEN}
-      initialViewState={initialViewState}
-      mapStyle="mapbox://styles/mapbox/streets-v12"
-      style={{ width: '100%', height: '100%' }}
-      reuseMaps
-    >
-      <NavigationControl position="top-right" />
+    <div className="h-full w-full">
+      <Map
+        ref={mapRef}
+        mapboxAccessToken={MAPBOX_TOKEN}
+        initialViewState={initialViewState}
+        mapStyle="mapbox://styles/mapbox/streets-v12"
+        style={{ width: '100%', height: '100%' }}
+        reuseMaps
+      >
+        <NavigationControl position="top-right" />
 
-      {properties.map((property) => {
-        const isActive = hoveredId === property.id;
-        return (
-          <Marker
-            key={property.id}
-            longitude={property.coordinates.lng}
-            latitude={property.coordinates.lat}
-            anchor="bottom"
-            onClick={(e) => {
-              e.originalEvent.stopPropagation();
-              setSelectedId(property.id);
-              onMarkerClick?.(property.id);
-            }}
-          >
-            <button
-              type="button"
-              onMouseEnter={() => onMarkerHover?.(property.id)}
-              onMouseLeave={() => onMarkerHover?.(null)}
-              className={`rounded-full px-2.5 py-1 text-xs font-semibold shadow-lg transition-transform cursor-pointer ${
-                isActive
-                  ? 'scale-110 text-white bg-[#3e5b4b]'
-                  : 'text-brand-900 bg-[#f8f6f1]'
-              }`}
+        {properties.map((property) => {
+          const isActive = hoveredId === property.id;
+          return (
+            <Marker
+              key={property.id}
+              longitude={property.coordinates.lng}
+              latitude={property.coordinates.lat}
+              anchor="bottom"
+              onClick={(e) => {
+                e.originalEvent.stopPropagation();
+                setSelectedId(property.id);
+                onMarkerClick?.(property.id);
+              }}
             >
-              ${Math.round(property.price / 1000)}k
-            </button>
-          </Marker>
-        );
-      })}
+              <button
+                type="button"
+                onMouseEnter={() => onMarkerHover?.(property.id)}
+                onMouseLeave={() => onMarkerHover?.(null)}
+                className={`rounded-full px-2.5 py-1 text-xs font-semibold shadow-lg transition-transform cursor-pointer ${
+                  isActive
+                    ? 'scale-110 text-white bg-[#3e5b4b]'
+                    : 'text-brand-900 bg-[#f8f6f1]'
+                }`}
+              >
+                ${Math.round(property.price / 1000)}k
+              </button>
+            </Marker>
+          );
+        })}
 
-      {selectedProperty && (
-        <Popup
-          longitude={selectedProperty.coordinates.lng}
-          latitude={selectedProperty.coordinates.lat}
-          anchor="top"
-          onClose={() => setSelectedId(null)}
-          closeOnClick={true}
-          className='cursor-pointer'
-        >
-          <a href={selectedProperty.url.es}>
-            <img 
-              className='popup-image'
-              src={selectedProperty.gallery.find((g) => g.type === 'image')?.url}
-              alt="" 
-            />
-            <div className='popup-content'>
-              <p className="max-w-45 text-sm font-medium text-brand-900">
-                {selectedProperty.title.es}
-              </p>
-              <span>${Math.round(selectedProperty.price / 1000)}k </span>
-            </div>
-          </a>
-        </Popup>
-      )}
-    </Map>
+        {selectedProperty && (
+          <Popup
+            longitude={selectedProperty.coordinates.lng}
+            latitude={selectedProperty.coordinates.lat}
+            anchor="top"
+            onClose={() => setSelectedId(null)}
+            closeOnClick={true}
+            className='cursor-pointer'
+          >
+            <a href={selectedProperty.url.es}>
+              <img 
+                className='popup-image'
+                src={selectedProperty.gallery.find((g) => g.type === 'image')?.url}
+                alt="" 
+              />
+              <div className='popup-content'>
+                <p className="max-w-45 text-sm font-medium text-brand-900">
+                  {selectedProperty.title.es}
+                </p>
+                <span>${Math.round(selectedProperty.price / 1000)}k </span>
+              </div>
+            </a>
+          </Popup>
+        )}
+      </Map>
+    </div>
   );
 }

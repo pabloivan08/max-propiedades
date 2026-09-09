@@ -30,11 +30,18 @@ export default function SearchLayout({ locale = 'es' }) {
   const t = COPY[locale] ?? COPY.es;
   const allProperties = propertiesData.properties;
 
-  const [priceRange, setPriceRange] = useState([ABSOLUTE_MIN, ABSOLUTE_MAX]);
+  const [priceRange, setPriceRange] = useState([
+    ABSOLUTE_MIN,
+    ABSOLUTE_MAX,
+  ]);
+
   const [hoveredId, setHoveredId] = useState(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [propertyType, setPropertyType] = useState('all');
   const [investmentType, setInvestmentType] = useState('all');
+
+  // Vista actual en móvil
+  const [view, setView] = useState('list');
 
   const filteredProperties = useMemo(() => {
     return allProperties.filter((property) => {
@@ -65,20 +72,78 @@ export default function SearchLayout({ locale = 'es' }) {
 
   const handleMinChange = (e) => {
     const value = Number(e.target.value);
-    setPriceRange(([, max]) => [Math.min(value, max), max]);
+
+    setPriceRange(([, max]) => [
+      Math.min(value, max),
+      max,
+    ]);
   };
 
   const handleMaxChange = (e) => {
     const value = Number(e.target.value);
-    setPriceRange(([min]) => [min, Math.max(value, min)]);
+
+    setPriceRange(([min]) => [
+      min,
+      Math.max(value, min),
+    ]);
   };
 
   return (
-    <div className="flex h-screen w-full flex-col md:flex-row bg-[#FFFAF3]">
-      {/* ---------- Panel izquierdo: filtros + listado ---------- */}
-      <section className="flex h-1/2 w-full flex-col overflow-hidden md:h-full md:w-1/2">
-        <header className="px-6 py-4 bg-[#ffffff]">
+    <div className="relative flex h-full w-full flex-col overflow-hidden bg-[#FFFAF3] md:flex-row">
+
+      {/* =====================================================
+          TOGGLE LISTA / MAPA
+          Solo aparece en móvil
+      ===================================================== */}
+      <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 md:hidden">
+        <div className="flex rounded-full bg-white p-1 shadow-xl ring-1 ring-black/5">
+
+          <button
+            type="button"
+            onClick={() => setView('list')}
+            aria-pressed={view === 'list'}
+            className={`rounded-full px-5 py-2.5 text-sm font-medium transition-all ${
+              view === 'list'
+                ? 'bg-[#3e5b4b] text-white'
+                : 'text-brand-900'
+            }`}
+          >
+            Lista
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setView('map')}
+            aria-pressed={view === 'map'}
+            className={`rounded-full px-5 py-2.5 text-sm font-medium transition-all ${
+              view === 'map'
+                ? 'bg-[#3e5b4b] text-white'
+                : 'text-brand-900'
+            }`}
+          >
+            Mapa
+          </button>
+
+        </div>
+      </div>
+
+
+      {/* =====================================================
+          PANEL IZQUIERDO
+          FILTROS + LISTADO
+      ===================================================== */}
+      <section
+        className={`
+          flex h-full w-full flex-col overflow-hidden
+          md:static md:flex md:h-full md:w-1/2
+          ${view === 'list' ? 'flex' : 'hidden md:flex'}
+        `}
+      >
+
+        {/* HEADER */}
+        <header className="shrink-0 bg-white px-6 py-4">
           <div className="flex items-center justify-between">
+
             <a href="https://maxpropiedadespxm.com">
               <h1 className="font-display text-2xl text-brand-900">
                 {t.title}
@@ -89,7 +154,7 @@ export default function SearchLayout({ locale = 'es' }) {
               type="button"
               onClick={() => setIsFilterOpen(true)}
               aria-label="Abrir filtros"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#e9e9e9] bg-[#f8f6f1] cursor-pointer text-brand-900 transition-colors hover:border-[#bfbfbf]"
+              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#e9e9e9] bg-[#f8f6f1] text-brand-900 transition-colors hover:border-[#bfbfbf]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -106,6 +171,7 @@ export default function SearchLayout({ locale = 'es' }) {
                 />
               </svg>
             </button>
+
           </div>
 
           <p className="text-xs text-brand-900/50">
@@ -113,6 +179,10 @@ export default function SearchLayout({ locale = 'es' }) {
           </p>
         </header>
 
+
+        {/* =====================================================
+            MODAL DE FILTROS
+        ===================================================== */}
         {isFilterOpen && (
           <div
             className="fixed inset-0 z-100 flex items-end justify-center bg-brand-900/40 p-0 md:items-center md:p-6"
@@ -122,8 +192,10 @@ export default function SearchLayout({ locale = 'es' }) {
               className="w-full rounded-t-4xl bg-[#f8f6f1] p-6 shadow-2xl md:max-w-lg md:rounded-4xl"
               onClick={(e) => e.stopPropagation()}
             >
+
               {/* Header del modal */}
               <div className="flex items-center justify-between">
+
                 <h2 className="font-display text-2xl text-brand-900">
                   Filtros
                 </h2>
@@ -149,44 +221,54 @@ export default function SearchLayout({ locale = 'es' }) {
                     />
                   </svg>
                 </button>
+
               </div>
+
 
               {/* Tipo de propiedad */}
               <div className="mt-8">
+
                 <p className="mb-3 text-sm font-medium text-brand-900">
                   Tipo de propiedad
                 </p>
 
                 <div className="grid grid-cols-3 gap-2">
+
                   {[
                     { value: 'all', label: 'Todos' },
                     { value: 'terreno', label: 'Terreno' },
                     { value: 'departamento', label: 'Departamento' },
                     { value: 'casa', label: 'Casa' },
                   ].map((option) => (
+
                     <button
                       key={option.value}
                       type="button"
                       onClick={() => setPropertyType(option.value)}
                       className={`rounded-xl px-3 py-3 text-sm transition-colors ${
                         propertyType === option.value
-                          ? 'bg-[#3e5b4b] text-[#f8f6f1] cursor-pointer'
-                          : 'bg-[#e4e4e4] text-[#3e5b4b] hover:bg-[#cddfd5] cursor-pointer'
+                          ? 'cursor-pointer bg-[#3e5b4b] text-[#f8f6f1]'
+                          : 'cursor-pointer bg-[#e4e4e4] text-[#3e5b4b] hover:bg-[#cddfd5]'
                       }`}
                     >
                       {option.label}
                     </button>
+
                   ))}
+
                 </div>
               </div>
 
+
               {/* Rango de precio */}
               <div className="mt-8">
+
                 <p className="mb-3 text-sm font-medium text-brand-900">
                   Rango de precio
                 </p>
 
                 <div className="flex items-center gap-3">
+
                   <label className="flex flex-1 flex-col text-xs text-brand-900/50">
                     {t.min}
 
@@ -218,16 +300,20 @@ export default function SearchLayout({ locale = 'es' }) {
                       className="mt-1 rounded-xl border border-brand-100 px-3 py-2 text-sm text-brand-900 focus:border-brand-500 focus:outline-none"
                     />
                   </label>
+
                 </div>
               </div>
 
+
               {/* Tipo de inversión */}
               <div className="mt-8">
+
                 <p className="mb-3 text-sm font-medium text-brand-900">
                   Tipo de inversión
                 </p>
 
                 <div className="grid grid-cols-1 gap-2">
+
                   {[
                     {
                       value: 'all',
@@ -250,17 +336,21 @@ export default function SearchLayout({ locale = 'es' }) {
                       label: 'Proyecto turístico',
                     },
                   ].map((option) => (
+
                     <button
                       key={option.value}
                       type="button"
                       onClick={() => setInvestmentType(option.value)}
                       className={`flex items-center justify-between rounded-xl px-4 py-3 text-left text-sm transition-colors ${
                         investmentType === option.value
-                          ? 'bg-[#3e5b4b] text-[#f8f6f1] cursor-pointer'
-                          : 'border-[#3e5b4b] bg-[#e4e4e4] text-[#3e5b4b] hover:bg-[#cddfd5] cursor-pointer'
+                          ? 'cursor-pointer bg-[#3e5b4b] text-[#f8f6f1]'
+                          : 'cursor-pointer bg-[#e4e4e4] text-[#3e5b4b] hover:bg-[#cddfd5]'
                       }`}
                     >
-                      <span>{option.label}</span>
+
+                      <span>
+                        {option.label}
+                      </span>
 
                       {investmentType === option.value && (
                         <svg
@@ -278,21 +368,29 @@ export default function SearchLayout({ locale = 'es' }) {
                           />
                         </svg>
                       )}
+
                     </button>
+
                   ))}
+
                 </div>
               </div>
 
+
               {/* Acciones */}
               <div className="mt-8 flex gap-3">
+
                 <button
                   type="button"
                   onClick={() => {
                     setPropertyType('all');
                     setInvestmentType('all');
-                    setPriceRange([ABSOLUTE_MIN, ABSOLUTE_MAX]);
+                    setPriceRange([
+                      ABSOLUTE_MIN,
+                      ABSOLUTE_MAX,
+                    ]);
                   }}
-                  className="flex-1 rounded-full px-5 py-3 bg-[#e4e4e4] text-sm font-medium text-brand-900 cursor-pointer hover:bg-[#cddfd5]"
+                  className="flex-1 cursor-pointer rounded-full bg-[#e4e4e4] px-5 py-3 text-sm font-medium text-brand-900 hover:bg-[#cddfd5]"
                 >
                   Limpiar
                 </button>
@@ -300,75 +398,126 @@ export default function SearchLayout({ locale = 'es' }) {
                 <button
                   type="button"
                   onClick={() => setIsFilterOpen(false)}
-                  className="flex-1 rounded-full bg-[#3e5b4b] px-5 py-3 text-sm font-medium text-[#f8f6f1] cursor-pointer"
+                  className="flex-1 cursor-pointer rounded-full bg-[#3e5b4b] px-5 py-3 text-sm font-medium text-[#f8f6f1]"
                 >
                   Ver resultados
                 </button>
+
               </div>
+
             </div>
           </div>
         )}
 
 
+        {/* =====================================================
+            LISTADO
+        ===================================================== */}
+        <div className="min-h-0 flex-1 overflow-y-auto px-6 py-6 pb-20">
 
-        <div className="flex-1 overflow-y-auto px-6 py-6">
           {filteredProperties.length === 0 ? (
-            <p className="text-sm text-brand-900/50">{t.noResults}</p>
+
+            <p className="text-sm text-brand-900/50">
+              {t.noResults}
+            </p>
+
           ) : (
+
             <ul className="grid grid-cols-1 gap-x-6 gap-y-16 md:grid-cols-2">
+
               {filteredProperties.map((property) => {
-                const image = property.gallery.find((g) => g.type === 'image');
+
+                const image = property.gallery.find(
+                  (g) => g.type === 'image'
+                );
 
                 return (
+
                   <li
                     key={property.id}
                     className="group cursor-pointer"
                     onMouseEnter={() => setHoveredId(property.id)}
                     onMouseLeave={() => setHoveredId(null)}
                   >
+
                     <a href={property.url.es}>
+
                       <div className="relative aspect-4/3 overflow-hidden rounded-xl">
+
                         <img
                           src={image?.url}
                           alt={image?.alt?.[locale] ?? ''}
                           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                           loading="lazy"
                         />
+
                       </div>
 
                       <div className="mt-1 px-2">
+
                         <div className="flex items-start justify-between gap-2">
+
                           <p className="truncate text-xl font-semibold text-brand-900">
                             {property.title[locale]}
                           </p>
+
                         </div>
 
                         <p className="mt-0 text-lg- text-gray-500">
-                          {property.area_m2} m² {property.bedrooms ? ` - ${property.bedrooms} habitacion${property.bedrooms > 1 ? 'es' : ''}` : ''}
+                          {property.area_m2} m²
+                          {property.bedrooms
+                            ? ` - ${property.bedrooms} habitacion${
+                                property.bedrooms > 1
+                                  ? 'es'
+                                  : ''
+                              }`
+                            : ''}
                         </p>
 
                         <p className="mt-2 text-base font-semibold text-brand-900 underline font-1">
-                          {t.perNight} {property.price.toLocaleString(locale)}
+                          {t.perNight}{' '}
+                          {property.price.toLocaleString(locale)}
                         </p>
+
                       </div>
+
                     </a>
+
                   </li>
+
                 );
               })}
+
             </ul>
+
           )}
+
         </div>
+
       </section>
 
-      {/* ---------- Panel derecho: mapa ---------- */}
-      <section className="h-1/2 w-full md:h-full md:w-1/2">
+
+      {/* =====================================================
+          PANEL DERECHO: MAPA
+      ===================================================== */}
+      <section
+        className={`
+          h-full w-full
+          md:static md:h-full md:w-1/2
+          ${view === 'map' ? 'block' : 'hidden md:block'}
+        `}
+      >
+
         <MapboxSearch
           properties={filteredProperties}
           hoveredId={hoveredId}
           onMarkerHover={setHoveredId}
           onMarkerClick={setHoveredId}
         />
+
       </section>
+
     </div>
   );
 }
+
