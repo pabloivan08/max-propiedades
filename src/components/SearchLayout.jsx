@@ -327,7 +327,7 @@ export default function SearchLayout({ locale = 'es' }) {
                     onMouseLeave={() => setHoveredId(null)}
                   >
                     <a href={property.url.es}>
-                      <div className="relative aspect-4/3 overflow-hidden rounded-[20px]">
+                      <div className="relative aspect-4/3 overflow-hidden rounded-xl">
                         <img
                           src={image?.url}
                           alt={image?.alt?.[locale] ?? ''}
